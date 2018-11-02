@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="QuizView">
+        <attr name="quizString" format="string" />
+        <attr name="quizTextViewLayout" format="reference" />
+        <attr name="quizEditTextLayout" format="reference" />
+        <attr name="quizSpotDrawable" format="reference" />
+    </declare-styleable>
+
+</resources>

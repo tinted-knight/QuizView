@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="QuizView">
+        <item name="quizTextViewLayout">@layout/textview_quiztext_def</item>
+        <item name="quizEditTextLayout">@layout/edittext_quizspot_def</item>
+        <item name="quizSpotDrawable">@drawable/quizspot_background_def</item>
+    </style>
+</resources>
