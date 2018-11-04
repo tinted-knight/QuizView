@@ -14,16 +14,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val btnAnswers = findViewById<Button>(R.id.btnAnswers)
         val quizView = findViewById<QuizView>(R.id.quizView)
 
         quizView.apply {
             setQuizSpots(prepareSpotsWithUnderscopes())
-            focusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            spotFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
                 if (hasFocus) v.tag.toString().logi("focusListener")
             }
+            // Try to comment this line and watch nextFocusForward behavior
+            viewCheck = btnAnswers
         }
 
-        val btnAnswers = findViewById<Button>(R.id.btnAnswers)
         btnAnswers.setOnClickListener {
             quizView.answers.forEach { answer -> answer.logi("ans: ") }
         }

@@ -9,30 +9,29 @@ import android.view.ViewTreeObserver
 import android.widget.EditText
 import android.widget.FrameLayout
 
-// TODO: Add to QuizView attributes spotSuffix and spotPrefix parameters (e.g. underscopes)
-
 class QuizView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    // TODO: option to set this prefix
-    private var etPrefixTag = "et_tag_"
-
-    private val quizAnswers = ArrayList<EditText>()
-
     val answers by lazy { quizAnswers.map { it.text.toString() } }
 
-    private val textView: QuizTextView
-
-    private val editTextLayoutId: Int
-
-    var focusChangeListener: OnFocusChangeListener? = null
+    var spotFocusChangeListener: OnFocusChangeListener? = null
         set(value) {
             field = value
             quizAnswers.forEach { it.onFocusChangeListener = field }
         }
+
+    lateinit var viewCheck: View
+
+    private var etPrefixTag = "et_tag_"
+
+    private val quizAnswers = ArrayList<EditText>()
+
+    private val textView: QuizTextView
+
+    private val editTextLayoutId: Int
 
     init {
         val attrReadHelper = AttrReadHelper(context, attrs)
@@ -65,14 +64,13 @@ class QuizView @JvmOverloads constructor(
         textView.quizSpotRects.forEach {
             it.adjustOffset(textView)
             val editText = inflater.inflate(editTextLayoutId, this, false) as EditText
-            // TODO: Add to QuizView attributes spotSuffix and spotPrefix parameters (e.g. underscopes)
             editText.apply {
                 background = null
                 // Limit EditText length to specific spot's word length
                 filters = arrayOf<InputFilter>(InputFilter.LengthFilter(it.wordLength - 2))
                 tag = etPrefixTag + tagIndex++
                 id = View.generateViewId()
-                onFocusChangeListener = focusChangeListener
+                onFocusChangeListener = spotFocusChangeListener
                 addOnLayoutChangeListener { view, _, _, _, _, _, _, _, _ ->
                     view.apply {
                         left = it.rect.left
@@ -89,14 +87,18 @@ class QuizView @JvmOverloads constructor(
     }
 
     private fun reorderForNavigation() {
-        val maxId = quizAnswers.size - 1
-
-        for (i in 1 until maxId)
+        val size = quizAnswers.size
+        for (i in 0 until size - 1)
             quizAnswers[i].nextFocusForwardId = quizAnswers[i + 1].id
 
-        // TODO: option to set View id (e.g. Check button) to be after all EditText's
-        // From last jump to first
-        quizAnswers[maxId].nextFocusForwardId = quizAnswers[0].id
+        // If viewCheck then from last jump to viewCheck and to first
+        // else from last jump to first
+        if (::viewCheck.isInitialized) {
+            quizAnswers[size - 1].nextFocusForwardId = viewCheck.id
+            viewCheck.nextFocusForwardId = quizAnswers[0].id
+        } else {
+            quizAnswers[size - 1].nextFocusForwardId = quizAnswers[0].id
+        }
     }
 
 }
