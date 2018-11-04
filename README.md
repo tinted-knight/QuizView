@@ -22,8 +22,7 @@ quizView.spotFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
                 // show hint or log or whatever
 }
 ```
-- Supports accesibility in navigation: you can use `next` keyboard action or `Tab` an hardware keyboard
-  - And you can setup `check` View that will become active during `tab` navigation after last EditText and `next` action will return focus to first EditText
+- Supports accesibility in navigation: you can use `next` keyboard action or `Tab` on hardware keyboard. You can setup `check` View (here you may want to check if answer are correct) and it will become active during `tab` navigation after last EditText and `next` action will return focus to first EditText.
 ```kotlin
 quizView.viewCheck = btnAnswers
 ```
