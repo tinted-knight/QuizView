@@ -6,7 +6,7 @@ Sample app is quiz-like text string with 4 empty spots.
 
 <img src="https://github.com/tinted-knight/QuizView/blob/master/screenshots/Screenshot_1541338578.png" height=400>
 
-# What it can do
+# What can it do
 - Setup where to draw EditText's like integer pairs (startOffset, endOffset)
 ```kotlin
     ArrayList<QuizSpot>().apply {
