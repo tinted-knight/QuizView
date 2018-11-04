@@ -4,7 +4,7 @@ A simple ViewGroup extends FrameLayout to draw multiple EditText's over TextView
 # Sample App
 Sample app is quiz-like text string with 4 empty spots.
 
-<img src="https://github.com/tinted-knight/QuizView/blob/master/screenshots/Screenshot_1541338578.png" height=400>
+<img src="screenshots/Screenshot_1541338578.png" height=400>
 
 # What can it do
 - Setup where to draw EditText's like integer pairs (startOffset, endOffset)
