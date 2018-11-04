@@ -15,14 +15,13 @@ class QuizTextView @JvmOverloads constructor(
     defStyleAttr: Int = android.R.attr.textViewStyle
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
-    val quizSpotRects = ArrayList<QuizSpotRect>()
+    internal val quizSpotRects = ArrayList<QuizSpotRect>()
     lateinit var quizSpots: List<QuizSpot>
     lateinit var drawable: Drawable
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         quizSpotRects.forEach {
-            //            it.rect.toString().logi("onDraw")
             drawable.setBounds(it.rect.left, it.rect.top, it.rect.right, it.rect.bottom)
             drawable.draw(canvas)
         }
@@ -43,6 +42,8 @@ class QuizTextView @JvmOverloads constructor(
         }
     }
 
+    // This function from here https://stackoverflow.com/a/11934366/8460732
+    // and simplified a lot
     private fun calculateMeasures(startOffset: Int, endOffset: Int): Rect {
         val textViewLayout = this.layout
         val parentTextViewRect = Rect()
@@ -68,6 +69,10 @@ class QuizTextView @JvmOverloads constructor(
         return parentTextViewRect
     }
 
+    // This two functions are from
+    // here https://medium.com/androiddevelopers/drawing-a-rounded-corner-background-on-text-5a610a95af5
+    // and here https://github.com/googlesamples/android-text/blob/master/RoundedBackground-Kotlin/lib/src/main/java/com/android/example/text/styling/roundedbg/LayoutExtensions.kt
+    // with some changes
     private fun getLineBottomWithoutExtraPadding(line: Int): Int {
         val lineBottom = layout.getLineBottom(line)
         val isLastLine = (line == layout.lineCount - 1)

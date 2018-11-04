@@ -3,7 +3,7 @@ package com.evha.quizview
 import android.graphics.Rect
 import android.widget.TextView
 
-data class QuizSpotRect(val rect: Rect, val startOffset: Int, val endOffset: Int) {
+internal data class QuizSpotRect(val rect: Rect, val startOffset: Int, val endOffset: Int) {
 
     val wordLength = endOffset - startOffset
 

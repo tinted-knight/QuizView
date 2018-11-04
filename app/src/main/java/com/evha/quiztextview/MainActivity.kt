@@ -1,12 +1,14 @@
 package com.evha.quiztextview
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.evha.quizview.QuizSpot
 import com.evha.quizview.QuizView
-import com.evha.quizview.logi
+
+fun String.logi(prefix: String) = Log.i("TAGG", "$prefix: $this")
 
 class MainActivity : AppCompatActivity() {
 
